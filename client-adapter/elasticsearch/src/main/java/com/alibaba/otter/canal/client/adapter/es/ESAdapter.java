@@ -221,8 +221,7 @@ public class ESAdapter implements OuterAdapter {
         ESMapping mapping = config.getEsMapping();
         SearchResponse response = this.esConnection.new ESSearchRequest(mapping.get_index(), mapping.get_type()).size(0)
             .getResponse();
-
-        long rowCount = response.getHits().getTotalHits();
+        long rowCount = response.getHits().getTotalHits().value;
         Map<String, Object> res = new LinkedHashMap<>();
         res.put("esIndex", mapping.get_index());
         res.put("count", rowCount);

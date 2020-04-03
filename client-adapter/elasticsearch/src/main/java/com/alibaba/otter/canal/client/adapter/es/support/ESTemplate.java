@@ -491,7 +491,7 @@ public class ESTemplate {
         if (fieldType != null) {
             return fieldType.get(fieldName);
         } else {
-            MappingMetaData mappingMetaData = esConnection.getMapping(mapping.get_index(), mapping.get_type());
+            MappingMetaData mappingMetaData = esConnection.getMapping(mapping.get_index(),"properties");
 
             if (mappingMetaData == null) {
                 throw new IllegalArgumentException("Not found the mapping info of index: " + mapping.get_index());
@@ -500,8 +500,7 @@ public class ESTemplate {
             fieldType = new LinkedHashMap<>();
 
             Map<String, Object> sourceMap = mappingMetaData.getSourceAsMap();
-            Map<String, Object> esMapping = (Map<String, Object>) sourceMap.get("properties");
-            for (Map.Entry<String, Object> entry : esMapping.entrySet()) {
+            for (Map.Entry<String, Object> entry : sourceMap.entrySet()) {
                 Map<String, Object> value = (Map<String, Object>) entry.getValue();
                 if (value.containsKey("properties")) {
                     fieldType.put(entry.getKey(), "object");
