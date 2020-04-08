@@ -262,6 +262,7 @@ public class ESTemplate {
         String esType = getEsType(mapping, fieldName);
 
         Object value = resultSet.getObject(columnName);
+        System.out.println("db cloumn ="+columnName+",es field="+fieldName);
         if (value instanceof Boolean) {
             if (!"boolean".equals(esType)) {
                 value = resultSet.getByte(columnName);
