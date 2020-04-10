@@ -4,10 +4,10 @@ groupId: g1
 esMapping:
   _index: sns_blog
   _type: _doc
-  _id: id
+  _id: _id
   upsert: true
   #  pk: id
-  sql: "select id,uid,type,uptime,content,pic,video,description,status from sns_blog_1"
+  sql: "select id as _id,id,uid,type,uptime,content,pic,video,description,status from sns_blog_1"
   #  objFields:
   #    _labels: array:;
   #  etlCondition: "where a.c_time>={}"
